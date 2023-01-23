@@ -1,0 +1,149 @@
+{% extends 'movies/base.html' %}
+{% load i18n static %}
+{% block title %} {{ movie.title }} {% endblock title %}
+{% block container %}
+    <div class="container py-md-3">
+{% endblock container %}
+
+{% block sidebar %}
+    <div class="side-bar col-lg-4">
+{% endblock sidebar %}
+
+{% block movie %}
+    <div class="left-ads-display col-lg-8">
+        <div class="row">
+            <div class="desc1-left col-md-6 text-center">
+                <img src="{{ movie.image.url }}" class="img-fluid" alt="">
+            </div>
+            <div class="desc1-right col-md-6 pl-lg-4">
+                <h3 class="editContent" style="outline: none; cursor: inherit;">
+                    {{ movie.title }}</h3>
+                <h5 class="editContent"></h5>
+                <ul>
+                    <li class="mb-3" style="list-style: none"><span><b>{% trans 'Год' %}:</b> {{ movie.year }}</span></li>
+                    <li class="mb-3" style="list-style: none"><span><b>{% trans 'Страна' %}:</b> {{ movie.country }}</span>
+                    </li>
+                    <li class="mb-3" style="list-style: none"><span><b>{% trans 'В главных ролях' %}:</b>
+                        {% for actor in movie.actors.all %}
+                            <ul>{{ actor.name }}</ul>
+                        {% endfor %}</span></li>
+                    <li class="mb-3" style="list-style: none"><span><b>{% trans 'Жанр' %}: </b>
+                        {% for genre in movie.genre.all %}
+                            <ul>{{ genre.name }}</ul></span>
+                        {% endfor %}
+                    </li>
+                    <li style="list-style: none">
+                        <a href="#"><b>{% trans 'Рейтинг' %}:</b>
+                            <span class="fa fa-star" aria-hidden="true"
+                                  style="outline: none; cursor: inherit;"></span>
+                            <span class="fa fa-star" aria-hidden="true"
+                                  style="outline: none; cursor: inherit;"></span>
+                            <span class="fa fa-star" aria-hidden="true"
+                                  style="outline: none; cursor: inherit;"></span>
+                            <span class="fa fa-star" aria-hidden="true"
+                                  style="outline: none; cursor: inherit;"></span>
+                            <span class="fa fa-star" aria-hidden="true"
+                                  style="outline: none; cursor: inherit;"></span>
+                            <span class="editContent"
+                                  style="outline: none; cursor: inherit;">5.0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row sub-para-w3layouts mt-5">
+
+            <h3 class="shop-sing editContent text-center" style="outline: none; cursor: inherit; width: 760px;">
+                {% if movie.category_id == 2 %}
+                    {% trans 'О мультфильме' %} {{ movie.title }}
+                {% endif %}
+                {% if movie.category_id == 1 %}
+                    {% trans 'О фильме' %} {{ movie.title }}
+                {% endif %}
+            </h3>
+            <p class="editContent" style="outline: none; cursor: inherit;">{{ movie.description|safe }}</p>
+        </div>
+        <hr style="width: 760px" class="mx-auto">
+        <div class="row sub-para-w3layouts mt-5">
+            <div class="single-form-left col-lg-9">
+                <!-- contact form grid -->
+                <div class="contact-single mx-auto" style="width: 760px">
+                    <h3 class="editContent text-center" style="outline: none; cursor: inherit; width:760px;">
+                                    <span class="sub-tittle editContent"
+                                          style="outline: none; cursor: inherit;"></span>{% trans 'Оставить отзыв' %}</h3>
+                    <form action="{% url 'add_review' movie.id %}" method="post" class="mt-4">
+                        {% csrf_token %}
+                        <div class="form-group editContent"
+                             style="outline: none; cursor: inherit;">
+                            <label for="contactcomment" class="editContent"
+                                   style="outline: none; cursor: inherit;">{% trans 'Ваш отзыв' %}</label>
+                            <textarea class="form-control border" rows="5"
+                                      id="contactcomment" required="" name="text"
+                                      placeholder="{% trans 'Введите ваш отзыв' %}"></textarea>
+                        </div>
+                        <div class="d-sm-flex">
+                            <div class="col-sm-6 form-group p-0 editContent"
+                                 style="outline: none; cursor: inherit;">
+                                <label for="contactusername" class="editContent"
+                                       style="outline: none; cursor: inherit;">{% trans 'Ваше имя' %}</label>
+                                <input type="text" class="form-control border"
+                                       id="contactusername" required="" name="name" placeholder="{% trans 'Введите ваше имя' %}">
+                            </div>
+                            <div class="col-sm-6 form-group ml-sm-3 editContent"
+                                 style="outline: none; cursor: inherit;">
+                                <label for="contactemail" class="editContent"
+                                       style="outline: none; cursor: inherit;">{% trans 'Ваш' %}email</label>
+                                <input type="email" class="form-control border"
+                                       id="contactemail" required="" name="email"
+                                       placeholder="{% trans 'Введите адрес электронной почты' %}">
+                            </div>
+                        </div>
+                        <button type="submit"
+                                class="mt-3 btn btn-outline-success btn-block py-3"
+                                style="outline: none; cursor: inherit;">{% trans 'Отправить' %}
+                        </button>
+                    </form>
+                </div>
+                <!--  //contact form grid ends here -->
+            </div>
+        </div>
+        <div class="column mt-5">
+            <h3 class="editContent text-center" style="outline: none; cursor: inherit; width:760px;">
+                                    <span class="sub-tittle editContent"
+                                          style="outline: none; cursor: inherit;"></span>{% trans 'Отзывы' %}({{ movie.reviewsfilm_set.count }})
+            </h3>
+            <div class="section mt-5">
+                {% for review in movie.reviewsfilm_set.all %}
+                    <div class="media mb-4">
+                        <img src="{% static '/images/reviewers.jpg' %}" class="my-2 img-fluid" alt="image">
+                        <div class="media-body mt-4 ml-4">
+                            <h5 class="mt-0 editContent">{{ review.name }}</h5>
+                            <p class="mt-2 editContent">
+                                {{ review.text }}
+                            </p>
+                            {#                    <div class="media mt-5 editContent"#}
+                            {#                         style="outline: none; cursor: inherit;">#}
+                            {#                        <a class="pr-3" href="#">#}
+                            {#                            <img src="bundles/images/te1.jpg" class="img-fluid "#}
+                            {#                                 alt="image" style="outline: none; cursor: inherit;">#}
+                            {#                        </a>#}
+                            {#                        <div class="media-body">#}
+                            {#                            <h5 class="mt-0 editContent"#}
+                            {#                                style="outline: none; cursor: inherit;">Leia Organa</h5>#}
+                            {#                            <p class="mt-2 editContent"#}
+                            {#                               style="outline: none; cursor: inherit;"> Cras sit amet#}
+                            {#                                nibh libero, in gravida nulla. Nulla vel metus#}
+                            {#                                scelerisque ante sollicitudin. Cras purus odio,#}
+                            {#                                vestibulum in vulputate at, tempus viverra turpis. Fusce#}
+                            {#                                condimentum nunc ac nisi vulputate fringilla..</p>#}
+                            {#                        </div>#}
+                            {#                    </div>#}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+{% endblock movie %}

@@ -1,0 +1,9 @@
+{% load i18n templatetag %}
+<div class="search-bar w3layouts-newsletter">
+    <h3 class="sear-head editContent">{% trans 'Поиск' %}</h3>
+    <form action="{% url 'search' %}" method="get" class="d-flex editContent">
+        <input type="search" placeholder="{% trans 'Введите название...' %}" name="q" class="form-control" required="">
+        <button class="btn1 btn" type="submit"><span class="fa fa-search" aria-hidden="true"></span></button>
+    </form>
+</div>
+{% get_last_movies %}

@@ -1,0 +1,31 @@
+{% extends 'movies/base.html' %}
+{% load i18n static templatetag %}
+{% block title %} Москино Сатурн {% endblock %}
+{% block header %} bg1 {% endblock header %}
+
+{% block content %}
+    <div class="" style="width: 98vw">
+        <div class="mx-auto text-center" style="width: 760px">
+            {% get_moscino as moscino %}
+            <h4 class="mt-5 mb-3">
+                <span class="editContent"> {{ moscino }}</span>
+            </h4>
+
+            <h6 class="mb-3">
+                <span class="editContent"> {{ moscino.description }}</span>
+            </h6>
+
+            <h6 class="mb-3">
+                {% trans 'Контактный номер' %}:
+                <a href="tel:{{ moscino.number }}">{{ moscino.number }}</a>
+            </h6>
+            <h6 class="mb-5">
+            <a target="_blank" href="https://yandex.ru/maps/213/moscow/house/snezhnaya_ulitsa_18/Z04YcANnTEQEQFtvfXR0cHVlYQ==/?ll=37.647513%2C55.851965&z=16.81">
+                {{ moscino.address }}
+            </a>
+                </h6>
+        </div>
+    </div>
+
+
+{% endblock content %}

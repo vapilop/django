@@ -1,0 +1,58 @@
+{% extends 'movies/base.html' %}
+{% block header %} bg1 {% endblock header %}
+{% block title %} Фантастика {% endblock title %}
+{% block movie %}
+    <div class="left-ads-display col-lg-9">
+        <div class="row">
+            {% for movie in movie_list %}
+                <div class="col-md-4 product-men" id="col-md-4 product-men">
+                    <div class="product-shoe-info editContent text-center mt-lg-4">
+                        <div class="men-thumb-item">
+                            <a href="{{ movie.get_absolute_url }}">
+                                <img src="{{ movie.image.url }}" class="img-fluid" alt="">
+                            </a>
+                        </div>
+                        <div class="item-info-product">
+                            <h4 class="">
+                                <a href="{{ movie.get_absolute_url }}" class="editContent">
+                                    {{ movie.title }}</a>
+                            </h4>
+
+                            <div class="product_price">
+                                <div class="grid-price">
+                                    <a href="{{ movie.get_absolute_url }}">
+                                        <button type="button" class="btn btn-dark">Подробнее</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="pagination justify-content-center my-3">
+            <ul class="pagination justify-content-center" style="width: 300px;">
+                <li class="page-item row">
+                    {% if page_obj.has_previous %}
+                        <a class="page-link" href="?page=1">&laquo;</a>
+                        <a class="page-link"
+                           href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+                    {% endif %}
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ page_obj.number }} <span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="page-item row">
+                    {% if page_obj.has_next %}
+                        <a class="page-link"
+                           href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+                        </li>
+                    {% endif %}
+            </ul>
+        </div>
+
+    </div>
+{% endblock movie %}
+<!-- //contact -->

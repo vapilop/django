@@ -1,0 +1,52 @@
+{% load i18n templatetag %}
+<footer class="editContent">
+    <div class="container text-center">
+        <div class="row footer-top">
+            <div class="col-lg-8 mx-auto my-5">
+                <div class="w3layouts-news-letter" style="width: 760px;">
+                    <h3 class="footer-title text-uppercase editContent mb-lg-4 mb-3">{% trans 'О нас' %}</h3>
+                    <p class="editContent">{% trans 'Я в своем познании настолько преисполнился, что я как будто бы уже сто триллионов миллиардов лет проживаю на триллионах и триллионах таких же планет, как эта Земля' %}</p>
+                    <p class="editContent">{% trans '<3' %}</p>
+
+                </div>
+                <div class="row mt-lg-4 bottom-w3layouts-sec-nav justify-content-center" style="width: 760px;">
+                    <div class="col-md-4 footer-grid_section_w3layouts">
+                        <h3 class="footer-title text-uppercase editContent mb-lg-4 mb-3">{% trans 'Разделы' %}</h3>
+                        <ul class="list-unstyled w3layouts-icons">
+
+                            <li>
+                                {% get_categories as categories %}
+                                {% for category in categories %}
+                                    <li><a class="editContent" href="/{{ category.url }}">{{ category.name }}</a></li>
+                                {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col-md-4 footer-grid_section_w3layouts">
+                        <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3 editContent">{% trans 'Контакты' %}</h3>
+                        <div class="contact-info">
+                            <div class="footer-address-inf my-4">
+                                <h4 class="ad-info mb-2 editContent">{% trans 'Почта' %}</h4>
+                                <p class="editContent"><a href="mailto:tux703404@gmail.com">vtyurina.polina@gmail.com</a></p>
+                            </div>
+                            <div class="footer-address-inf">
+                                <h4 class="ad-info mb-2 editContent">{% trans 'Наш адрес' %}</h4>
+                                <p class="editContent">{% trans 'Московский Поликек' %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- //footer -->
+<div class="row mx-auto">
+    <div class="container mx-auto">
+        <div class="row justify-content-center">
+            <p class="text-center">Втюрина Полина | 211-323 | КиноСайт </p>
+            <a href="#home" class="move-top text-center ml-3"><span class="fa fa-long-arrow-up"
+                                                                    aria-hidden="true"></span></a>
+            <!-- //move top icon -->
+        </div>
+    </div>
+</div>
